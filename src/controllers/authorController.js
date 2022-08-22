@@ -1,3 +1,4 @@
+const authorModel = require("../models/authorModel")
 const AuthorModel= require("../models/authorModel")
 
 const createAuthor= async function (req, res) {
@@ -7,7 +8,12 @@ const createAuthor= async function (req, res) {
 }
 
 const getAuthorsData= async function (req, res) {
-    let authors = await AuthorModel.find()
+    // let authors = await AuthorModel.updateMany({mobileName:vivo},{$set:{price:10}},{upsert:true})
+  let authors = await AuthorModel.findOneAndUpdate( {_id : requestBlogId}, {isPublished : true}, {new : true, upsert : true})
+
+     
+     
+    console.log(typeof authors)
     res.send({data: authors})
 }
 
